@@ -5,6 +5,7 @@ public class Team implements Comparable<Team>{
 	private String Name;
 	private int CountWon;
 	private int CountLost;
+	private int CountDraw;
 	private int GoalsScored;
 	private int GoalsGot;
 	private int Points;
@@ -15,6 +16,7 @@ public class Team implements Comparable<Team>{
 		Name = name;
 		CountWon = 0;
 		CountLost = 0;
+		CountDraw = 0;
 		GoalsScored = 0;
 		GoalsGot = 0;
 		Points = 0;
@@ -44,6 +46,32 @@ public class Team implements Comparable<Team>{
 		return 0;
 	}
 	
+	public void gameFinished(int goalsScored, int goalsGot) throws GoalsMustBePrositivException {
+		if(goalsScored <= 0 || goalsGot <= 0) {
+			throw new GoalsMustBePrositivException();
+		}
+		if(goalsScored > goalsGot) {
+			CountWon++;
+			GoalsScored+=goalsScored;
+			GoalsGot+=goalsGot;
+			PlayedRounds++;
+			Points+=3;
+		}
+		if(goalsScored < goalsGot) {
+			CountLost++;
+			GoalsScored+=goalsScored;
+			GoalsGot+=goalsGot;
+			PlayedRounds++;
+		}
+		if(goalsScored == goalsGot) {
+			CountDraw++;
+			GoalsScored+=goalsScored;
+			GoalsGot+=goalsGot;
+			PlayedRounds++;
+			Points+=1;
+		}
+	}
+	
 	
 	//Getter-----------------------
 
@@ -57,6 +85,10 @@ public class Team implements Comparable<Team>{
 
 	public int getCountLost() {
 		return CountLost;
+	}
+	
+	public int getCountDraw() {
+		return CountDraw;
 	}
 
 	public int getGoalsScored() {

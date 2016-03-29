@@ -32,5 +32,29 @@ public class Liga {
 		Collections.sort(Teams, new ComparatorName());
 		return Teams;
 	}
+	
+	private Team findTeam(String name) {
+		for (Team team : Teams) {
+			if(team.getName().equals(name));
+			return team;
+		}
+		return null;
+	}
+	
+	public void newGame(String teamA, int goalsA, String teamB, int goalsB) throws TeamNotFoundException, LigaException {
+		Team a = findTeam(teamA);
+		Team b = findTeam(teamB);
+		
+		if(a == null || b == null) {
+			throw new TeamNotFoundException();
+		}
+		try {
+			a.gameFinished(goalsA, goalsB);
+			b.gameFinished(goalsB, goalsA);
+		} catch (GoalsMustBePrositivException e) {
+			throw new LigaException();
+		}
+		
+	}
 
 }
