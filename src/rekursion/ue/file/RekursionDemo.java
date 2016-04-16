@@ -7,7 +7,7 @@ public class RekursionDemo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		File file = new File("/Test");
+		File file = new File("/temp");
 		System.out.println(file.listFiles().length);
 		
 		System.out.println("Size: " + getSize(file));
