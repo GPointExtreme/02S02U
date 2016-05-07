@@ -17,6 +17,31 @@ public class Bank {
 		return list;
 	}
 	
+	public ArrayList<Kredit> getNaechsterKreditFaellig() {
+		KreditOffeneJahre k = new KreditOffeneJahre();
+		Collections.sort(list, k);
+		return list;
+	}
+	
+	public void neuerKredit(Kredit k) throws ToMuchOpenCreditException {
+		if(list.size() <= 3) {
+			list.add(k);
+		}
+		else
+			throw new ToMuchOpenCreditException();
+	}
+	
+	public void deductAll() {
+		for (Kredit kredit : list) {
+			try {
+				kredit.deduct();
+			} catch (CreditAlreadyPaidException e) {
+				list.remove(kredit);
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	
 

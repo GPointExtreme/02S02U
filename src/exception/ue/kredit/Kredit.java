@@ -40,12 +40,49 @@ public class Kredit implements Comparable<Kredit>{
 		}
 		return 0;
 	}
+	
+	public void deduct() throws CreditAlreadyPaidException {
+		if(gesamtBetrag >= rate && offeneJahre > 0) {
+			gesamtBetrag -= rate;
+			offeneJahre--;
+		}
+		else
+			throw new CreditAlreadyPaidException();
+	}
 
 	@Override
 	public String toString() {
 		return "Kredit [vertragsPartner=" + vertragsPartner + ", vertragsDatum=" + vertragsDatum + ", gesamtBetrag="
 				+ gesamtBetrag + ", gesamtJahre=" + gesamtJahre + ", offenerBetrag=" + offenerBetrag + ", offeneJahre="
 				+ offeneJahre + ", rate=" + rate + "]";
+	}
+
+	public String getVertragsPartner() {
+		return vertragsPartner;
+	}
+
+	public String getVertragsDatum() {
+		return vertragsDatum;
+	}
+
+	public double getGesamtBetrag() {
+		return gesamtBetrag;
+	}
+
+	public int getGesamtJahre() {
+		return gesamtJahre;
+	}
+
+	public double getOffenerBetrag() {
+		return offenerBetrag;
+	}
+
+	public int getOffeneJahre() {
+		return offeneJahre;
+	}
+
+	public double getRate() {
+		return rate;
 	}
 
 }
